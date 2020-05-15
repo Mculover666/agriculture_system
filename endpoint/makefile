@@ -1,5 +1,5 @@
 CC = gcc
-CROSS_CC = arm-none-guneabi-linux
+CROSS_CC = arm-linux-guneabi-gcc
 
 endpoint_PC:endpoint.c
 	$(CC) endpoint.c -o endpoint
