@@ -57,4 +57,96 @@ insert into value(id,temp_max,humi_max,temp_min,humi_min) values(2016211961,10.0
 
 ![](https://img-blog.csdnimg.cn/20200514224907159.png#pic_center)
 
-# 3. 
+# 3. 运行服务端
+
+服务端源码在server文件夹，需要在云服务器上运行，使用gcc编译。
+
+进入到server文件夹，执行make命令编译：
+
+```bash
+cd server
+make
+```
+
+![](https://img-blog.csdnimg.cn/20200515150850878.png)
+
+然后运行程序（默认监听8002端口，使用UDP协议，如果有安全组需要放行该端口）:
+```bash
+./server
+```
+
+# 4. 运行客户端
+
+客户端运行在桌面Linux上，源码在client文件夹下面，进入之后使用make命令编译：
+
+```bash
+cd client
+make
+```
+
+![](https://img-blog.csdnimg.cn/20200515152140854.png)
+
+编译之后运行程序：
+
+```bash
+./client
+```
+
+## 4.1. 查询当前阈值
+
+![](https://img-blog.csdnimg.cn/20200515152309512.png)
+
+## 4.2. 修改阈值
+
+修改最大湿度值为50.5：
+![](https://img-blog.csdnimg.cn/20200515152425159.png)
+
+# 5. 运行终端
+
+终端中只使用到了UDP Socket编程，所以可以编译为桌面Linux的程序，也可以编译为ARM开发板上的程序。
+
+## 5.1. 在桌面Linux上测试
+
+进入endpoint文件夹，编译：
+```bash
+cd endpoint
+make endpoint_PC
+```
+![](https://img-blog.csdnimg.cn/20200515153340362.png)
+
+运行程序，第一个参数是云服务器ip，第二个参数是云服务器端口：
+
+![](https://img-blog.csdnimg.cn/20200515154625401.png)
+
+可以看到终端每隔5s向服务器上报一次数据，在服务端也可以看到上报的数据：
+
+![](https://img-blog.csdnimg.cn/20200515154706907.png)
+
+在MySQL中查看历史记录：
+
+![](https://img-blog.csdnimg.cn/20200515154905673.png)
+
+## 5.2. 在ARM开发板测试（使用Qemu模拟）
+
+编译：
+```bash
+arm-linux-gnueabi-gcc endpoint.c -o endpoint.o
+```
+
+![](https://img-blog.csdnimg.cn/20200515155523640.png)
+
+使用NFS复制可执行程序到开发板中：
+
+![](https://img-blog.csdnimg.cn/20200515160047582.png)
+
+运行程序：
+
+![](https://img-blog.csdnimg.cn/20200515160630915.png)
+
+在服务器端查看数据：
+
+![](https://img-blog.csdnimg.cn/20200515160655807.png)
+
+接收更多精彩文章及资源推送，欢迎订阅我的微信公众号：『mculover666』。
+
+![](https://img-blog.csdnimg.cn/20200515160814838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01jdWxvdmVyNjY2,size_16,color_FFFFFF,t_70)
