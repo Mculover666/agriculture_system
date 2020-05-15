@@ -187,6 +187,12 @@ int main()
             sendto(server_sock_fd,udp_buf,strlen(udp_buf),0,(struct sockaddr *)&client_addr,len);
             printf("[UDP Server]系统已经向控制终端发送水阀开启指令!\n");
         }
+        else
+        {
+            sprintf(udp_buf, "normal");
+            sendto(server_sock_fd,udp_buf,strlen(udp_buf),0,(struct sockaddr *)&client_addr,len);
+            printf("[UDP Server]系统正常运行!\n");
+        }
     
     }
     mysql_close(con);

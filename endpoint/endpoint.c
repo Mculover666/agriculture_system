@@ -102,12 +102,6 @@ int main(int argc, char* argv[])
             printf("水阀已关闭!\n");
             strcpy(sw, "off");
         }
-        else
-        {
-            sprintf(udp_buf, "normal");
-            sendto(server_sock_fd,udp_buf,strlen(udp_buf),0,(struct sockaddr *)&client_addr,len);
-            printf("[UDP Server]系统正常运行!\n");
-        }
 
         /* 延时5s */
         sleep(5);
